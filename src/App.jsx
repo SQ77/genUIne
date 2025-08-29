@@ -32,19 +32,7 @@ export function App(props) {
           <text className='Subtitle'>on Lynx</text>
         </view>
         <view className='Content'>
-          <image src={arrow} className='Arrow' />
-          <text className='Description'>Tap the logo and have fun!</text>
-          <text className='Hint'>
-            Edit<text
-              style={{
-                fontStyle: 'italic',
-                color: 'rgba(255, 255, 255, 0.85)',
-              }}
-            >
-              {' src/App.tsx '}
-            </text>
-            to see updates!
-          </text>
+          <input type="text" className='PromptInput' placeholder='Input your prompt....'/>
         </view>
         <view style={{ flex: 1 }} />
       </view>

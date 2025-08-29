@@ -117,3 +117,10 @@ text {
   margin: 5px;
   color: rgba(255, 255, 255, 0.65);
 }
+
+.PromptInput {
+  background-color: #fff;
+  border-radius: 20px;
+  width: 90%;
+  height: max-content;
+}
