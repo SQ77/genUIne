@@ -5,12 +5,7 @@
 
 .Background {
   position: fixed;
-  background: radial-gradient(
-    71.43% 62.3% at 46.43% 36.43%,
-    rgba(18, 229, 229, 0) 15%,
-    rgba(239, 155, 255, 0.3) 56.35%,
-    #ff6448 100%
-  );
+  background: grey;
   box-shadow: 0px 12.93px 28.74px 0px #ffd28db2 inset;
   border-radius: 50%;
   width: 200vw;
@@ -33,7 +28,7 @@ text {
   color: var(--color-text);
 }
 
-.Banner {
+.Dashboard {
   flex: 5;
   display: flex;
   flex-direction: column;
@@ -123,4 +118,15 @@ text {
   border-radius: 20px;
   width: 100%;
   height: max-content;
+}
+
+.Statistic {
+  min-width: 25vh;
+  min-height: 15vh;
+  border: 5px solid;
+  border-color: #000;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
 }
