@@ -24,15 +24,11 @@ export function App(props) {
       <view className='Background' />
       <view className='App'>
         <view className='Dashboard'>
-          <text className="Statistic">
-            <text>
-              HELLO
-            </text>
+          <text className="Statistic">       
+              HELLO   
           </text>
           <text className="Statistic">
-            <text>
               HELLO
-            </text>
           </text>
         </view>
         <view className='Content'>

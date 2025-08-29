@@ -123,10 +123,12 @@ text {
 .Statistic {
   min-width: 25vh;
   min-height: 15vh;
-  border: 5px solid;
+  border: 2px solid;
   border-color: #000;
   border-radius: 25px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  text-align: center;
   justify-items: center;
+  margin-bottom: 10px;
 }
