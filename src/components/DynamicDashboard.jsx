@@ -8,9 +8,77 @@ import { createCreatorStats } from '../utils/types';
 import '../styles/DynamicDashboard.css';
 
 export function DynamicDashboard() {
-    const [components, setComponents] = useState([]);
+    const [components, setComponents] = useState([
+        {
+            id: 'post-views',
+            type: 'metric',
+            data: {
+                title: 'Post Views',
+                statistic: '82.3K',
+                changePercent: 7.9,
+                changeValue: +6000
+            },
+            config: {}
+        },
+        {
+            id: 'profile-views',
+            type: 'metric',
+            data: {
+                title: 'Profile Views',
+                statistic: '4.6K',
+                changePercent: -2.1,
+                changeValue: -100
+            },
+            config: {}
+        },
+        {
+            id: 'likes',
+            type: 'metric',
+            data: {
+                title: 'Likes',
+                statistic: '3.4K',
+                changePercent: +4.2,
+                changeValue: +140
+            },
+            config: {}
+        },
+        {
+            id: 'comments',
+            type: 'metric',
+            data: {
+                title: 'Comments',
+                statistic: '1.2K',
+                changePercent: -1.6,
+                changeValue: -20
+            },
+            config: {}
+        },
+        {
+            id: 'shares',
+            type: 'metric',
+            data: {
+                title: 'Shares',
+                statistic: '850',
+                changePercent: +3.5,
+                changeValue: +30
+            },
+            config: {}
+        },
+        {
+            id: 'unique-viewers',
+            type: 'metric',
+            data: {
+                title: 'Unique Viewers',
+                statistic: '12.5K',
+                changePercent: +5.1,
+                changeValue: +600
+            },
+            config: {}
+        }
+    ]);
     const [creatorStats, setCreatorStats] = useState(createCreatorStats());
     const [isChatOpen, setIsChatOpen] = useState(false);
+    const [selectedCard, setSelectedCard] = useState(null);
     const [period, setPeriod] = useState({
         time: 'days', // days or months
         amount: 7
@@ -40,8 +108,16 @@ export function DynamicDashboard() {
     const renderComponent = (component) => {
         const commonProps = {
             key: component.id,
-            data: component.data,
-            config: component.config,
+            id: component.id,
+            title: component.data.title,
+            statistic: component.data.statistic,
+            changePercent: component.data.changePercent,
+            changeValue: component.data.changeValue,
+            isSelected: selectedCard === component.id,
+            onSelect: (cardId) => {
+                // Toggle selection
+                setSelectedCard(selectedCard === cardId ? null : cardId);
+            },
             onRemove: () => removeComponent(component.id),
         };
 
@@ -67,6 +143,7 @@ export function DynamicDashboard() {
                 >
                     {components.map(renderComponent)}
                     {components.length === 0 && <InitialDashboard />}
+                    <InitialDashboard selectedCard={selectedCard} />
                     {isChatOpen && (
                         <ChatInterface
                             isOpen={isChatOpen}

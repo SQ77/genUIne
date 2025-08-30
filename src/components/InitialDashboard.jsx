@@ -1,63 +1,31 @@
 import { useState } from '@lynx-js/react';
-import StatisticCard from './StatisticCard';
-
 import '../styles/InitialDashboard.css';
 import { BarChart } from './BarChart';
 import { LineChart } from './LineChart';
 import { PieChart } from './PieChart';
 
-export default function InitialDashboard(props) {
+export default function InitialDashboard({ selectedCard: externalSelectedCard, ...props }) {
     const [selectedCard, setSelectedCard] = useState(null);
+    
+    // Use external selectedCard if provided, otherwise use internal state
+    const activeCard = externalSelectedCard !== undefined ? externalSelectedCard : selectedCard;
 
     props.onRender?.();
 
     const handleCardSelect = (cardId) => {
-        // Toggle selection
-        setSelectedCard(selectedCard === cardId ? null : cardId);
+        // Toggle selection (only used when no external selectedCard is provided)
+        if (externalSelectedCard === undefined) {
+            setSelectedCard(selectedCard === cardId ? null : cardId);
+        }
     };
 
     return (
         <view className="initial-dashboard">
             <text className="title">Analytics</text>
             <view className="cards-container">
-                <StatisticCard
-                    id="post-views"
-                    title="Post Views"
-                    statistic="82.3K"
-                    changePercent={7.9}
-                    changeValue={+6_000}
-                    isSelected={selectedCard === 'post-views'}
-                    onSelect={handleCardSelect}
-                />
-                <StatisticCard
-                    id="profile-views"
-                    title="Profile Views"
-                    statistic="4.6K"
-                    changePercent={-2.1}
-                    changeValue={-100}
-                    isSelected={selectedCard === 'profile-views'}
-                    onSelect={handleCardSelect}
-                />
-                <StatisticCard
-                    id="likes"
-                    title="Likes"
-                    statistic="3.4K"
-                    changePercent={+4.2}
-                    changeValue={+140}
-                    isSelected={selectedCard === 'likes'}
-                    onSelect={handleCardSelect}
-                />
-                <StatisticCard
-                    id="comments"
-                    title="Comments"
-                    statistic="1.2K"
-                    changePercent={-1.6}
-                    changeValue={-20}
-                    isSelected={selectedCard === 'comments'}
-                    onSelect={handleCardSelect}
-                />
+                {/* Cards will be rendered by DynamicDashboard */}
             </view>
-            {selectedCard === 'profile-views' && (
+            {activeCard === 'profile-views' && (
                 <BarChart
                     data={[
                         { month: 'Jan', views: 1200 },
@@ -72,7 +40,7 @@ export default function InitialDashboard(props) {
                     title="Profile Views by Month"
                 />
             )}
-            {selectedCard === 'post-views' && (
+            {activeCard === 'post-views' && (
                 <LineChart
                     data={[
                         { period: 'Mon', views: 4200 },
@@ -86,7 +54,7 @@ export default function InitialDashboard(props) {
                     title="Post Views by Day"
                 />
             )}
-            {selectedCard === 'likes' && (
+            {activeCard === 'likes' && (
                 <PieChart
                     data={[
                         { period: 'Mon', views: 4200 },
