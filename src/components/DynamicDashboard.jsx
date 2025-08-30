@@ -1,9 +1,8 @@
-import { useState, useCallback, useEffect } from '@lynx-js/react';
+import { useState } from '@lynx-js/react';
 import { ChatInterface } from './ChatInterface';
 import StatisticCard from './StatisticCard';
 import InitialDashboard from './InitialDashboard';
 import PeriodSelector from './PeriodSelector';
-import { createCreatorStats } from '../utils/types';
 
 import '../styles/DynamicDashboard.css';
 
@@ -76,7 +75,6 @@ export function DynamicDashboard() {
             config: {},
         },
     ]);
-    const [creatorStats, setCreatorStats] = useState(createCreatorStats());
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
     const [period, setPeriod] = useState({
@@ -85,25 +83,6 @@ export function DynamicDashboard() {
     });
 
     const [customTimeParsed, setCustomTimeParsed] = useState(null);
-
-    // Mock data - replace with real API calls
-    useEffect(() => {
-        const mockStats = createCreatorStats({
-            profileViews: 15420,
-            comments: 342,
-            likes: 1205,
-            followers: 8934,
-            engagement: 12.8,
-        });
-        setCreatorStats(mockStats);
-    }, []);
-
-    const updateComponents = useCallback((newComponents) => {
-        setComponents(newComponents);
-    }, []);
-
-    const getCurrentComponents = useCallback(() => components, [components]);
-    const getCreatorStats = useCallback(() => creatorStats, [creatorStats]);
 
     const renderComponent = (component) => {
         const commonProps = {
@@ -156,9 +135,8 @@ export function DynamicDashboard() {
                             <ChatInterface
                                 isOpen={isChatOpen}
                                 onClose={() => setIsChatOpen(false)}
-                                onUIUpdate={updateComponents}
-                                getCurrentComponents={getCurrentComponents}
-                                getCreatorStats={getCreatorStats}
+                                onSend={setPeriod}
+                                onConfirm={setCustomTimeParsed}
                             />
                         )}
                     </view>

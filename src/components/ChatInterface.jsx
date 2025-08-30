@@ -7,13 +7,7 @@ import {
 import '../styles/ChatInterface.css';
 import parseUserinput from '../api/backend';
 
-export function ChatInterface({
-    isOpen,
-    onClose,
-    onUIUpdate,
-    getCurrentComponents,
-    getCreatorStats,
-}) {
+export function ChatInterface({ isOpen, onClose, onSend, onConfirm }) {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +45,6 @@ export function ChatInterface({
     useLynxGlobalEventListener(
         'keyboardstatuschanged',
         (status, keyboardHeight) => {
-            console.log('Keyboard status:', status, 'Height:', keyboardHeight);
             keyboardChanged(status === 'on' ? keyboardHeight : 0);
         },
     );
@@ -86,16 +79,20 @@ export function ChatInterface({
         setIsLoading(true);
 
         try {
+            const response = parseUserinput(message);
 
-            const response = await parseUserinput(message);
-
-            console.log("Response is", response)
+            console.log('Response is', response);
+            const timePeriod = response.timestamps[0].label;
+            const timeAmount = response.timestamps[0].range;
+            onSend({ time: timePeriod || 'days', amount: timeAmount || 10 });
+            if (timePeriod && timeAmount) {
+                onConfirm({ time: timePeriod, amount: timeAmount });
+            }
 
             setMessages((prev) => [
                 ...prev,
-                { role: 'assistant', content: JSON.stringify(response)},
+                { role: 'assistant', content: JSON.stringify(response) },
             ]);
-
         } catch (error) {
             setMessages((prev) => [
                 ...prev,
