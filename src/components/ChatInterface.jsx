@@ -1,4 +1,9 @@
-import { useState, useEffect, useRef } from '@lynx-js/react';
+import {
+    useState,
+    useEffect,
+    useRef,
+    useLynxGlobalEventListener,
+} from '@lynx-js/react';
 import '../styles/ChatInterface.css';
 
 export function ChatInterface({
@@ -13,6 +18,39 @@ export function ChatInterface({
     const [isLoading, setIsLoading] = useState(false);
     const [inputFocus, setInputFocus] = useState(false);
     const messagesEndRef = useRef(null);
+
+    // Native props setter for keyboard avoidance
+    const setNativeProps = (itemId, props) => {
+        lynx.createSelectorQuery()
+            .select(`#${itemId}`)
+            .setNativeProps(props)
+            .exec();
+    };
+
+    // Keyboard avoidance handler
+    const keyboardChanged = (keyboardHeightInPx) => {
+        if (keyboardHeightInPx === 0) {
+            setNativeProps('chat-input-panel', {
+                transform: `translateY(${0}px)`,
+                transition: 'transform 0.1s',
+            });
+        } else {
+            const adjustedOffset = Math.min(keyboardHeightInPx * 0.6, keyboardHeightInPx - 50);
+            setNativeProps('chat-input-panel', {
+                transform: `translateY(${-adjustedOffset}px)`,
+                transition: 'transform 0.3s',
+            });
+        }
+    };
+
+    // Listen for keyboard status changes
+    useLynxGlobalEventListener(
+        'keyboardstatuschanged',
+        (status, keyboardHeight) => {
+            console.log('Keyboard status:', status, 'Height:', keyboardHeight);
+            keyboardChanged(status === 'on' ? keyboardHeight : 0);
+        },
+    );
 
     // Focus input when modal opens
     useEffect(() => {
@@ -130,11 +168,12 @@ export function ChatInterface({
                         <view ref={messagesEndRef} />
                     </scroll-view>
 
-                    <view className="chat-input">
+                    <view id="chat-input-panel" className="chat-input">
                         <input
                             focus={inputFocus}
                             placeholder="Ask me about your stats..."
                             disabled={isLoading}
+                            value={input}
                             bindinput={(res) => {
                                 setInput(res.detail.value);
                             }}
