@@ -47,25 +47,53 @@ export function BarChart({ data = [], height = 400, title }) {
                 <view
                     style={{
                         position: 'absolute',
-                        left: '10px',
+                        left: '5px',
                         top: '20px',
+                        width: '40px',
                         height: `${chartHeight}px`,
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        fontSize: '12px',
-                        color: '#666',
-                        zIndex: 10,
+                        fontSize: '10px',
+                        color: '#333',
+                        fontWeight: '500',
+                        zIndex: 15,
                         backgroundColor: '#fafafa',
-                        paddingRight: '8px',
+                        paddingRight: '5px',
                     }}
                 >
-                    <text>{formatValue(maxValue)}</text>
-                    <text>{formatValue(maxValue * 0.75)}</text>
-                    <text>{formatValue(maxValue * 0.5)}</text>
-                    <text>{formatValue(maxValue * 0.25)}</text>
-                    <text>0</text>
+                    <text style={{ textAlign: 'right' }}>{formatValue(maxValue)}</text>
+                    <text style={{ textAlign: 'right' }}>{formatValue(maxValue * 0.75)}</text>
+                    <text style={{ textAlign: 'right' }}>{formatValue(maxValue * 0.5)}</text>
+                    <text style={{ textAlign: 'right' }}>{formatValue(maxValue * 0.25)}</text>
+                    <text style={{ textAlign: 'right' }}>0</text>
                 </view>
+
+                {/* Y-axis line */}
+                <view
+                    style={{
+                        position: 'absolute',
+                        left: '50px',
+                        top: '20px',
+                        width: '2px',
+                        height: `${chartHeight}px`,
+                        backgroundColor: '#333',
+                        zIndex: 12,
+                    }}
+                />
+
+                {/* X-axis line */}
+                <view
+                    style={{
+                        position: 'absolute',
+                        left: '50px',
+                        bottom: '50px',
+                        right: '10px',
+                        height: '2px',
+                        backgroundColor: '#333',
+                        zIndex: 12,
+                    }}
+                />
 
                 {/* Chart area with horizontal scroll */}
                 <scroll-view
@@ -75,9 +103,7 @@ export function BarChart({ data = [], height = 400, title }) {
                         left: '50px',
                         top: '20px',
                         right: '10px',
-                        height: `${chartHeight}px`,
-                        borderLeft: '2px solid #ddd',
-                        borderBottom: '2px solid #ddd',
+                        bottom: '50px',
                         overflow: 'hidden',
                     }}
                 >
@@ -85,7 +111,7 @@ export function BarChart({ data = [], height = 400, title }) {
                     <view
                         style={{
                             width: `${contentWidth}px`,
-                            height: `${chartHeight}px`,
+                            height: '100%',
                             position: 'relative',
                             display: 'flex',
                             alignItems: 'end',
@@ -114,7 +140,7 @@ export function BarChart({ data = [], height = 400, title }) {
                                         right: '0',
                                         height: '1px',
                                         backgroundColor:
-                                            percent === 0 ? '#ddd' : '#f0f0f0',
+                                            percent === 0 ? '#333' : '#f0f0f0',
                                     }}
                                 />
                             ))}
@@ -133,9 +159,9 @@ export function BarChart({ data = [], height = 400, title }) {
                                 const value =
                                     item.views || item.profileViews || 0;
                                 const barHeight = Math.max(
-                                    2,
-                                    (value / maxValue) * chartHeight,
-                                ); // Min height of 2px
+                                    5,
+                                    (value / maxValue) * (chartHeight - 20),
+                                );
 
                                 return (
                                     <view
@@ -164,40 +190,34 @@ export function BarChart({ data = [], height = 400, title }) {
                                             <text>{formatValue(value)}</text>
                                         </view>
 
-                                        {/* Bar with internal label */}
+                                        {/* Bar with label inside */}
                                         <view
                                             style={{
                                                 width: '100%',
                                                 height: `${barHeight}px`,
-                                                backgroundColor: '#f0f9ff',
-                                                border: '2px solid #0ea5e9',
+                                                backgroundColor: '#0ea5e9',
                                                 borderRadius: '4px 4px 0 0',
                                                 cursor: 'pointer',
                                                 transition: 'all 0.3s ease',
                                                 boxShadow:
                                                     '0 2px 4px rgba(14, 165, 233, 0.1)',
-                                                position: 'relative',
                                                 display: 'flex',
                                                 alignItems: 'flex-end',
                                                 justifyContent: 'center',
                                                 paddingBottom: '4px',
                                             }}
                                         >
-                                            {/* X-axis label inside bar */}
                                             <text
                                                 style={{
-                                                    fontSize: '11px',
-                                                    color: '#0369a1',
+                                                    fontSize: '9px',
+                                                    color: '#ffffff',
                                                     fontWeight: '500',
                                                     textAlign: 'center',
-                                                    transform:
-                                                        barHeight < 30
-                                                            ? 'rotate(-90deg)'
-                                                            : 'none',
+                                                    transform: barHeight < 30 ? 'rotate(-90deg)' : 'none',
                                                     transformOrigin: 'center',
                                                 }}
                                             >
-                                                {item.month}
+                                                {item.period || item.month}
                                             </text>
                                         </view>
                                     </view>
