@@ -35,7 +35,10 @@ export function ChatInterface({
                 transition: 'transform 0.1s',
             });
         } else {
-            const adjustedOffset = Math.min(keyboardHeightInPx * 0.6, keyboardHeightInPx - 50);
+            const adjustedOffset = Math.min(
+                keyboardHeightInPx * 0.6,
+                keyboardHeightInPx - 50,
+            );
             setNativeProps('chat-input-panel', {
                 transform: `translateY(${-adjustedOffset}px)`,
                 transition: 'transform 0.3s',
@@ -66,6 +69,17 @@ export function ChatInterface({
 
         const userMessage = { role: 'user', content: message };
         setMessages((prev) => [...prev, userMessage]);
+
+        lynx.createSelectorQuery()
+            .select('#chat-input-field')
+            .invoke({
+                method: 'setValue',
+                params: {
+                    value: '',
+                },
+            })
+            .exec();
+
         setInput('');
         setIsLoading(true);
 
@@ -170,6 +184,7 @@ export function ChatInterface({
 
                     <view id="chat-input-panel" className="chat-input">
                         <input
+                            id="chat-input-field"
                             focus={inputFocus}
                             placeholder="Ask me about your stats..."
                             disabled={isLoading}
