@@ -61,3 +61,18 @@
 .chat-button-text {
     color: #fff;
 }
+
+.period-selector {
+    background-color: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    z-index: 10;
+}
+
+.period-button:hover {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+}
+
+.period-active:hover {
+    background-color: #5a67d8 !important;
+}
