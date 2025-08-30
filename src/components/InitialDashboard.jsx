@@ -68,6 +68,48 @@ export default function InitialDashboard({ selectedCard: externalSelectedCard, .
                     title="Likes Distribution"
                 />
             )}
+            {activeCard === 'comments' && (
+                <LineChart
+                    data={[
+                        { period: 'Mon', views: 4200 },
+                        { period: 'Tue', views: 3800 },
+                        { period: 'Wed', views: 5100 },
+                        { period: 'Thu', views: 6300 },
+                        { period: 'Fri', views: 7900 },
+                        { period: 'Sat', views: 9200 },
+                        { period: 'Sun', views: 8600 },
+                    ]}
+                    title="Comments by Day"
+                />
+            )}
+            {activeCard === 'shares' && (
+                <LineChart
+                    data={[
+                        { period: 'Mon', views: 4200 },
+                        { period: 'Tue', views: 3800 },
+                        { period: 'Wed', views: 5100 },
+                        { period: 'Thu', views: 6300 },
+                        { period: 'Fri', views: 7900 },
+                        { period: 'Sat', views: 9200 },
+                        { period: 'Sun', views: 8600 },
+                    ]}
+                    title="Shares by Day"
+                />
+            )}
+            {activeCard === 'unique-viewers' && (
+                <LineChart
+                    data={[
+                        { period: 'Mon', views: 4200 },
+                        { period: 'Tue', views: 3800 },
+                        { period: 'Wed', views: 5100 },
+                        { period: 'Thu', views: 6300 },
+                        { period: 'Fri', views: 7900 },
+                        { period: 'Sat', views: 9200 },
+                        { period: 'Sun', views: 8600 },
+                    ]}
+                    title="Viewers by Day"
+                />
+            )}
         </view>
     );
 }
