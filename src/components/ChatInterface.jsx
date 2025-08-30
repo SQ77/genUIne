@@ -5,6 +5,7 @@ import {
     useLynxGlobalEventListener,
 } from '@lynx-js/react';
 import '../styles/ChatInterface.css';
+import parseUserinput from '../api/backend';
 
 export function ChatInterface({
     isOpen,
@@ -70,6 +71,7 @@ export function ChatInterface({
         const userMessage = { role: 'user', content: message };
         setMessages((prev) => [...prev, userMessage]);
 
+        // Clear input field
         lynx.createSelectorQuery()
             .select('#chat-input-field')
             .invoke({
@@ -84,35 +86,17 @@ export function ChatInterface({
         setIsLoading(true);
 
         try {
-            // Send to AI service
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message,
-                    currentComponents: getCurrentComponents(),
-                    creatorStats: getCreatorStats(),
-                }),
-            });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            const response = await parseUserinput(message);
 
-            const { reply, uiUpdates } = await response.json();
+            console.log("Response is", response)
 
             setMessages((prev) => [
                 ...prev,
-                { role: 'assistant', content: reply },
+                { role: 'assistant', content: "SUCCESS!!!"},
             ]);
 
-            if (uiUpdates && uiUpdates.length > 0) {
-                onUIUpdate(uiUpdates);
-            }
         } catch (error) {
-            console.error('Error sending message:', error);
             setMessages((prev) => [
                 ...prev,
                 {
