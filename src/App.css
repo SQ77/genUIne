@@ -8,8 +8,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 20px;
 }
 
 text {
@@ -17,12 +16,26 @@ text {
 }
 
 .Dashboard {
-    flex: 5;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
+    width: 100%;
+}
+
+.Title {
+    font-size: 36px;
+    font-weight: 700;
+    align-self: flex-start;
+    margin-top: 30px;
+    margin-bottom: 24px;
+}
+
+.CardsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 500px;
+    width: 100%;
 }
 
 .Content {
@@ -30,11 +43,7 @@ text {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.Title {
-    font-size: 36px;
-    font-weight: 700;
+    margin-top: 40px;
 }
 
 .Subtitle {
@@ -77,7 +86,7 @@ text {
     background-color: #fff;
     border-radius: 16px;
     padding: 16px 20px;
-    width: 220px;
+    width: 100%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
