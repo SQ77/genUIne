@@ -83,7 +83,7 @@ export function ChatInterface({ isOpen, onClose, onSend, onConfirm }) {
 
             console.log('Response is', response);
             const timePeriod = response.timestamps[0].label;
-            const timeAmount = response.timestamps[0].range;
+            const timeAmount = response.timestamps[0].range - 1;
             onSend({ time: timePeriod || 'days', amount: timeAmount || 10 });
             if (timePeriod && timeAmount) {
                 onConfirm({ time: timePeriod, amount: timeAmount });
