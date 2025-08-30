@@ -84,6 +84,32 @@ export function DynamicDashboard() {
 
     const [customTimeParsed, setCustomTimeParsed] = useState(null);
 
+    const updateComponentsFromMetrics = (metrics) => {
+        if (!metrics || !Array.isArray(metrics)) return;
+
+        // Create a mapping function to convert metric text to component format
+        const createComponentFromMetric = (metric, index) => {
+            // Generate a unique ID based on the metric text
+            const id = metric.text.toLowerCase().replace(/\s+/g, '-');
+
+            return {
+                id: id,
+                type: 'metric',
+                data: {
+                    title: metric.text,
+                    statistic: metric.value || '0', // Use metric.value if available
+                    changePercent: metric.changePercent || 0,
+                    changeValue: metric.changeValue || 0,
+                },
+                config: {},
+            };
+        };
+
+        // Update components state with new metrics
+        const newComponents = metrics.map(createComponentFromMetric);
+        setComponents(newComponents);
+    };
+
     const renderComponent = (component) => {
         const commonProps = {
             key: component.id,
@@ -138,6 +164,7 @@ export function DynamicDashboard() {
                                 onClose={() => setIsChatOpen(false)}
                                 onSend={setPeriod}
                                 onConfirm={setCustomTimeParsed}
+                                onMetricsUpdate={updateComponentsFromMetrics}
                             />
                         )}
                     </view>

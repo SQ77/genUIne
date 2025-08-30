@@ -54,40 +54,29 @@ export function LineChart({ data = [], height = 400, title }) {
                     color: '#333',
                     fontSize: '16px',
                     fontWeight: 'bold',
+
                 }}
             >
                 {title}
             </text>
 
-            <view
-                style={{
-                    position: 'relative',
-                    width: '100%',
-                    maxWidth: '100vw',
-                    height: `${height}px`,
-                    border: '1px solid #e1e5e9',
-                    borderRadius: '8px',
-                    backgroundColor: '#fafafa',
-                    overflow: 'hidden',
-                }}
-            >
+           
                 {/* Y-axis labels */}
                 <view
                     style={{
                         position: 'absolute',
                         left: '10px',
-                        top: '20px',
+                        top: '50px',
                         height: `${chartHeight}px`,
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         fontSize: '12px',
                         color: '#666',
-                        zIndex: 10,
                         backgroundColor: '#fafafa',
                         paddingRight: '8px',
                     }}
-                >
+                > 
                     <text>{formatValue(maxValue)}</text>
                     <text>{formatValue(maxValue * 0.75)}</text>
                     <text>{formatValue(maxValue * 0.5)}</text>
@@ -99,7 +88,6 @@ export function LineChart({ data = [], height = 400, title }) {
                 <scroll-view
                     scroll-orientation="horizontal"
                     style={{
-                        position: 'absolute',
                         left: '50px',
                         top: '20px',
                         right: '10px',
@@ -120,7 +108,6 @@ export function LineChart({ data = [], height = 400, title }) {
                         {/* Grid lines */}
                         <view
                             style={{
-                                position: 'absolute',
                                 top: '0',
                                 left: '0',
                                 width: '100%',
@@ -132,7 +119,7 @@ export function LineChart({ data = [], height = 400, title }) {
                                 <view
                                     key={percent}
                                     style={{
-                                        position: 'absolute',
+                                        position: 'relative',
                                         bottom: `${percent * 100}%`,
                                         left: '0',
                                         right: '0',
@@ -158,7 +145,6 @@ export function LineChart({ data = [], height = 400, title }) {
                                     transformOrigin: '0 50%',
                                     transform: `rotate(${segment.angle}deg)`,
                                     borderRadius: '1.5px',
-                                    zIndex: 2,
                                 }}
                             />
                         ))}
@@ -179,7 +165,6 @@ export function LineChart({ data = [], height = 400, title }) {
                                         backgroundColor:
                                             'rgba(240, 249, 255, 0.9)',
                                         padding: '2px 4px',
-                                        zIndex: 4,
                                     }}
                                 >
                                     <text>{formatValue(point.value)}</text>
@@ -199,7 +184,6 @@ export function LineChart({ data = [], height = 400, title }) {
                                         boxShadow:
                                             '0 2px 4px rgba(14, 165, 233, 0.3)',
                                         cursor: 'pointer',
-                                        zIndex: 5,
                                     }}
                                 />
 
@@ -223,6 +207,5 @@ export function LineChart({ data = [], height = 400, title }) {
                     </view>
                 </scroll-view>
             </view>
-        </view>
     );
 }
