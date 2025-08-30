@@ -1,7 +1,7 @@
 import { useState } from '@lynx-js/react';
 import { ChatInterface } from './ChatInterface';
 import StatisticCard from './StatisticCard';
-import InitialDashboard from './InitialDashboard';
+import InitialDashboard from './Charts';
 import PeriodSelector from './PeriodSelector';
 
 import '../styles/DynamicDashboard.css';
@@ -169,7 +169,7 @@ export function DynamicDashboard() {
                         )}
                     </view>
 
-                    <InitialDashboard selectedCard={selectedCard} />
+                    <InitialDashboard selectedCard={selectedCard} period={period} />
                 </view>
                 <view
                     bindtap={() => setIsChatOpen(true)}
