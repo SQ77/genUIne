@@ -21,7 +21,6 @@ export default function InitialDashboard({ selectedCard: externalSelectedCard, .
 
     return (
         <view className="initial-dashboard">
-            <text className="title">Analytics</text>
             <view className="cards-container">
                 {/* Cards will be rendered by DynamicDashboard */}
             </view>
