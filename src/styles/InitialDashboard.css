@@ -9,11 +9,8 @@
 }
 
 .initial-dashboard {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     width: 100%;
-    padding: 15px;
+    height: 600px;
 }
 
 /* ================================== Statistic Card ====================================== */

@@ -138,29 +138,33 @@ export function DynamicDashboard() {
             <view className="dashboard-main">
                 <text className="title">Analytics</text>
                 <PeriodSelector period={period} onChange={setPeriod} customTimeParsed={customTimeParsed} />
-                <view
-                    className="dashboard-grid"
-                    style={{ position: 'relative', minHeight: '600px' }}
-                >
-                    {components.map(renderComponent)}
-                    {components.length === 0 && <InitialDashboard />}
-                    <InitialDashboard selectedCard={selectedCard} />
-                    {isChatOpen && (
-                        <ChatInterface
-                            isOpen={isChatOpen}
-                            onClose={() => setIsChatOpen(false)}
-                            onUIUpdate={updateComponents}
-                            getCurrentComponents={getCurrentComponents}
-                            getCreatorStats={getCreatorStats}
-                        />
-                    )}
+                <view className="dashboard-content">
                     <view
-                        bindtap={() => setIsChatOpen(true)}
-                        className="chat-button"
+                        className="dashboard-grid"
+                        style={{ position: 'relative', minHeight: '600px' }}
                     >
-                        <text className="chat-button-text">Chat</text>
+                        {components.map(renderComponent)}
+                        {components.length === 0 && <InitialDashboard />}
+                        {isChatOpen && (
+                            <ChatInterface
+                                isOpen={isChatOpen}
+                                onClose={() => setIsChatOpen(false)}
+                                onUIUpdate={updateComponents}
+                                getCurrentComponents={getCurrentComponents}
+                                getCreatorStats={getCreatorStats}
+                            />
+                        )}
                     </view>
+
+                    <InitialDashboard selectedCard={selectedCard} />
                 </view>
+                <view
+                    bindtap={() => setIsChatOpen(true)}
+                    className="chat-button"
+                >
+                    <text className="chat-button-text">Chat</text>
+                </view>
+
             </view>
         </view>
     );

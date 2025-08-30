@@ -21,9 +21,6 @@ export default function InitialDashboard({ selectedCard: externalSelectedCard, .
 
     return (
         <view className="initial-dashboard">
-            <view className="cards-container">
-                {/* Cards will be rendered by DynamicDashboard */}
-            </view>
             {activeCard === 'profile-views' && (
                 <BarChart
                     data={[
