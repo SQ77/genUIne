@@ -43,31 +43,28 @@ export function BarChart({ data = [], height = 400, title }) {
                     overflow: 'hidden',
                 }}
             >
-                {/* Y-axis labels */}
-                <view
-                    style={{
-                        position: 'absolute',
-                        left: '5px',
-                        top: '20px',
-                        width: '40px',
-                        height: `${chartHeight}px`,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        fontSize: '10px',
-                        color: '#333',
-                        fontWeight: '500',
-                        zIndex: 15,
-                        backgroundColor: '#fafafa',
-                        paddingRight: '5px',
-                    }}
-                >
-                    <text style={{ textAlign: 'right' }}>{formatValue(maxValue)}</text>
-                    <text style={{ textAlign: 'right' }}>{formatValue(maxValue * 0.75)}</text>
-                    <text style={{ textAlign: 'right' }}>{formatValue(maxValue * 0.5)}</text>
-                    <text style={{ textAlign: 'right' }}>{formatValue(maxValue * 0.25)}</text>
-                    <text style={{ textAlign: 'right' }}>0</text>
-                </view>
+            {/* Y-axis labels */}
+            <view
+                style={{
+                    position: 'absolute',
+                    left: '10px',
+                    top: '35px',
+                    height: `${chartHeight}px`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    fontSize: '12px',
+                    color: '#666',
+                    backgroundColor: '#fafafa',
+                    paddingRight: '8px',
+                }}
+            >
+                <text>{formatValue(maxValue)}</text>
+                <text>{formatValue(maxValue * 0.75)}</text>
+                <text>{formatValue(maxValue * 0.5)}</text>
+                <text>{formatValue(maxValue * 0.25)}</text>
+                <text>0</text>
+            </view>
 
                 {/* Y-axis line */}
                 <view

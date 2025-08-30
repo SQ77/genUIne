@@ -66,7 +66,7 @@ export function LineChart({ data = [], height = 400, title }) {
                 style={{
                     position: 'absolute',
                     left: '10px',
-                    top: '50px',
+                    top: '70px',
                     height: `${chartHeight}px`,
                     display: 'flex',
                     flexDirection: 'column',
@@ -151,7 +151,7 @@ export function LineChart({ data = [], height = 400, title }) {
                                 style={{
                                     position: 'absolute',
                                     left: `${point.x - 30}px`,
-                                    top: `${chartHeight + 8}px`,
+                                    top: `${chartHeight -5}px`,
                                     width: '60px',
                                     fontSize: '11px',
                                     color: 'black',
