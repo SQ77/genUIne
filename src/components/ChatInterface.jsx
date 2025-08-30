@@ -90,7 +90,7 @@ export function ChatInterface({
                 <view className="chat-modal-header">
                     <text className="chat-modal-title">genUIne</text>
                     <view className="chat-modal-close" bindtap={onClose}>
-                        ×
+                        <text>×</text>
                     </view>
                 </view>
 
@@ -144,7 +144,7 @@ export function ChatInterface({
                             className="send-button"
                             bindtap={() => handleSendMessage(input)}
                         >
-                            Send
+                            <text>Send</text>
                         </view>
                     </view>
                 </view>
