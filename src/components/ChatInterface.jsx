@@ -133,12 +133,11 @@ export function ChatInterface({
                     <view className="chat-input">
                         <input
                             focus={inputFocus}
-                            value={input}
-                            onInput={(e) => setInput(e.detail.value)}
-                            onConfirm={() => handleSendMessage(input)}
-                            onBlur={() => setInputFocus(false)}
                             placeholder="Ask me about your stats..."
                             disabled={isLoading}
+                            bindinput={(res) => {
+                                setInput(res.detail.value);
+                            }}
                         />
                         <view
                             className="send-button"
