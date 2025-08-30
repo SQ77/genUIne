@@ -93,6 +93,7 @@ export function DynamicDashboard() {
             changePercent: component.data.changePercent,
             changeValue: component.data.changeValue,
             isSelected: selectedCard === component.id,
+            period: period, // Pass period to StatisticCard
             onSelect: (cardId) => {
                 // Toggle selection
                 setSelectedCard(selectedCard === cardId ? null : cardId);
