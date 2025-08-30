@@ -1,14 +1,58 @@
-import { useState } from '@lynx-js/react';
+import { useState, useEffect } from '@lynx-js/react';
 import '../styles/InitialDashboard.css';
 import { BarChart } from './BarChart';
 import { LineChart } from './LineChart';
-import { PieChart } from './PieChart';
+import metricDataJson from '../../metric_data.json';
 
-export default function InitialDashboard({ selectedCard: externalSelectedCard, ...props }) {
+// Helper function to format data for charts
+const formatChartData = (data, periodType) => {
+    if (!data) return [];
+    const today = new Date();
+    const formattedData = [];
+
+    if (periodType === 'days') {
+        // The last item in `data` corresponds to today
+        for (let i = 0; i < data.length; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() - (data.length - 1 - i));
+            formattedData.push({
+                period: date.toISOString().split('T')[0], // Format: YYYY-MM-DD
+                views: data[i],
+            });
+        }
+    } else { // months
+        // The last item in `data` corresponds to the current month
+        for (let i = 0; i < data.length; i++) {
+            const date = new Date(today);
+            // Set month, accounting for year changes
+            date.setMonth(today.getMonth() - (data.length - 1 - i));
+            const month = date.toLocaleString('default', { month: 'short' });
+            const year = date.getFullYear();
+            formattedData.push({
+                period: `${month} ${year}`, // Format: 'Mon YYYY'
+                views: data[i],
+            });
+        }
+    }
+    return formattedData;
+};
+
+export default function InitialDashboard({ selectedCard: externalSelectedCard, period, ...props }) {
     const [selectedCard, setSelectedCard] = useState(null);
+    const [chartData, setChartData] = useState([]);
     
     // Use external selectedCard if provided, otherwise use internal state
     const activeCard = externalSelectedCard !== undefined ? externalSelectedCard : selectedCard;
+
+    useEffect(() => {
+        if (activeCard && period && metricDataJson[activeCard]) {
+            const dataForMetric = metricDataJson[activeCard][period.time];
+            const slicedData = dataForMetric.slice(-period.amount);
+            setChartData(formatChartData(slicedData, period.time));
+        } else {
+            setChartData([]);
+        }
+    }, [activeCard, period]);
 
     props.onRender?.();
 
@@ -23,87 +67,38 @@ export default function InitialDashboard({ selectedCard: externalSelectedCard, .
         <view className="initial-dashboard">
             {activeCard === 'profile-views' && (
                 <BarChart
-                    data={[
-                        { month: 'Jan', views: 1200 },
-                        { month: 'Feb', views: 1800 },
-                        { month: 'Mar', views: 2400 },
-                        { month: 'Apr', views: 1900 },
-                        { month: 'May', views: 3200 },
-                        { month: 'Jun', views: 2800 },
-                        { month: 'Jul', views: 3600 },
-                        { month: 'Aug', views: 4200 },
-                    ]}
-                    title="Profile Views by Month"
+                    data={chartData}
+                    title={`Profile Views (${period.time})`}
                 />
             )}
             {activeCard === 'post-views' && (
                 <LineChart
-                    data={[
-                        { period: 'Mon', views: 4200 },
-                        { period: 'Tue', views: 3800 },
-                        { period: 'Wed', views: 5100 },
-                        { period: 'Thu', views: 6300 },
-                        { period: 'Fri', views: 7900 },
-                        { period: 'Sat', views: 9200 },
-                        { period: 'Sun', views: 8600 },
-                    ]}
-                    title="Post Views by Day"
+                    data={chartData}
+                    title={`Post Views (${period.time})`}
                 />
             )}
             {activeCard === 'likes' && (
-                <PieChart
-                    data={[
-                        { period: 'Mon', views: 4200 },
-                        { period: 'Tue', views: 3800 },
-                        { period: 'Wed', views: 5100 },
-                        { period: 'Thu', views: 6300 },
-                        { period: 'Fri', views: 7900 },
-                        { period: 'Sat', views: 9200 },
-                        { period: 'Sun', views: 8600 },
-                    ]}
-                    title="Likes Distribution"
+                <BarChart
+                    data={chartData}
+                    title={`Likes (${period.time})`}
                 />
             )}
             {activeCard === 'comments' && (
                 <LineChart
-                    data={[
-                        { period: 'Mon', views: 4200 },
-                        { period: 'Tue', views: 3800 },
-                        { period: 'Wed', views: 5100 },
-                        { period: 'Thu', views: 6300 },
-                        { period: 'Fri', views: 7900 },
-                        { period: 'Sat', views: 9200 },
-                        { period: 'Sun', views: 8600 },
-                    ]}
-                    title="Comments by Day"
+                    data={chartData}
+                    title={`Comments (${period.time})`}
                 />
             )}
             {activeCard === 'shares' && (
                 <LineChart
-                    data={[
-                        { period: 'Mon', views: 4200 },
-                        { period: 'Tue', views: 3800 },
-                        { period: 'Wed', views: 5100 },
-                        { period: 'Thu', views: 6300 },
-                        { period: 'Fri', views: 7900 },
-                        { period: 'Sat', views: 9200 },
-                        { period: 'Sun', views: 8600 },
-                    ]}
-                    title="Shares by Day"
+                    data={chartData}
+                    title={`Shares (${period.time})`}
                 />
             )}
             {activeCard === 'unique-viewers' && (
                 <LineChart
-                    data={[
-                        { period: 'Mon', views: 4200 },
-                        { period: 'Tue', views: 3800 },
-                        { period: 'Wed', views: 5100 },
-                        { period: 'Thu', views: 6300 },
-                        { period: 'Fri', views: 7900 },
-                        { period: 'Sat', views: 9200 },
-                        { period: 'Sun', views: 8600 },
-                    ]}
-                    title="Viewers by Day"
+                    data={chartData}
+                    title={`Viewers (${period.time})`}
                 />
             )}
         </view>

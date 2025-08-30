@@ -169,7 +169,7 @@ export function DynamicDashboard() {
                         )}
                     </view>
 
-                    <InitialDashboard selectedCard={selectedCard} />
+                    <InitialDashboard selectedCard={selectedCard} period={period} />
                 </view>
                 <view
                     bindtap={() => setIsChatOpen(true)}
