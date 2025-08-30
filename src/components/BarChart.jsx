@@ -1,12 +1,12 @@
-export function BarChart({ data = [], width = '100%', height = 400, title }) {
+export function BarChart({ data = [], height = 400, title }) {
     if (!data.length) return <view>No data available</view>;
 
     const maxValue = Math.max(
         ...data.map((d) => d.views || d.profileViews || 0),
     );
-    const chartHeight = height - 80; // Leave space for labels
-    const barWidth = 60; // Fixed bar width for consistent scrolling
-    const barGap = 15; // Gap between bars
+    const chartHeight = height - 80;
+    const barWidth = 60; 
+    const barGap = 15; 
 
     // Calculate total content width for scrolling
     const totalBarsWidth = barWidth * data.length + barGap * (data.length - 1);
@@ -164,7 +164,7 @@ export function BarChart({ data = [], width = '100%', height = 400, title }) {
                                             <text>{formatValue(value)}</text>
                                         </view>
 
-                                        {/* Bar */}
+                                        {/* Bar with internal label */}
                                         <view
                                             style={{
                                                 width: '100%',
@@ -176,21 +176,29 @@ export function BarChart({ data = [], width = '100%', height = 400, title }) {
                                                 transition: 'all 0.3s ease',
                                                 boxShadow:
                                                     '0 2px 4px rgba(14, 165, 233, 0.1)',
-                                            }}
-                                        />
-
-                                        {/* X-axis label below chart */}
-                                        <view
-                                            style={{
-                                                marginTop: '8px',
-                                                fontSize: '11px',
-                                                color: '#0369a1',
-                                                textAlign: 'center',
-                                                fontWeight: '500',
-                                                width: '100%',
+                                                position: 'relative',
+                                                display: 'flex',
+                                                alignItems: 'flex-end',
+                                                justifyContent: 'center',
+                                                paddingBottom: '4px',
                                             }}
                                         >
-                                            <text>{item.month}</text>
+                                            {/* X-axis label inside bar */}
+                                            <text
+                                                style={{
+                                                    fontSize: '11px',
+                                                    color: '#0369a1',
+                                                    fontWeight: '500',
+                                                    textAlign: 'center',
+                                                    transform:
+                                                        barHeight < 30
+                                                            ? 'rotate(-90deg)'
+                                                            : 'none',
+                                                    transformOrigin: 'center',
+                                                }}
+                                            >
+                                                {item.month}
+                                            </text>
                                         </view>
                                     </view>
                                 );
