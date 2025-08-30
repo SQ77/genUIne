@@ -7,7 +7,7 @@ import {
 import '../styles/ChatInterface.css';
 import parseUserinput from '../api/backend';
 
-export function ChatInterface({ isOpen, onClose, onSend, onConfirm }) {
+export function ChatInterface({ isOpen, onClose, onSend, onConfirm, onMetricsUpdate }) {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -84,6 +84,13 @@ export function ChatInterface({ isOpen, onClose, onSend, onConfirm }) {
             console.log('Response is', response);
             const timePeriod = response.timestamps[0].label;
             const timeAmount = response.timestamps[0].range - 1;
+
+            const metrics = response.metrics;
+
+            if (onMetricsUpdate && metrics && metrics.length > 0) {
+                onMetricsUpdate(metrics);
+            }
+
             onSend({ time: timePeriod || 'days', amount: timeAmount || 10 });
             if (timePeriod && timeAmount) {
                 onConfirm({ time: timePeriod, amount: timeAmount });
