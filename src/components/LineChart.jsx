@@ -133,7 +133,7 @@ export function LineChart({ data = [], height = 400, title }) {
                                 style={{
                                     position: 'absolute',
                                     left: `${point.x - 25}px`,
-                                    top: `${point.y - 25}px`,
+                                    top: `${point.y}px`,
                                     width: '50px',
                                     fontSize: '10px',
                                     fontWeight: 'bold',
@@ -149,6 +149,7 @@ export function LineChart({ data = [], height = 400, title }) {
                             {/* Data point circle */}
                             <view
                                 style={{
+                                    position: 'absolute',
                                     left: `${point.x - pointRadius}px`,
                                     top: `${point.y - pointRadius}px`,
                                     width: `${pointRadius * 2}px`,
@@ -166,6 +167,7 @@ export function LineChart({ data = [], height = 400, title }) {
                             {/* X-axis label */}
                             <view
                                 style={{
+                                    position: 'absolute',
                                     left: `${point.x - 30}px`,
                                     top: `${chartHeight + 8}px`,
                                     width: '60px',
