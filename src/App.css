@@ -115,9 +115,21 @@ text {
 
 .PromptInput {
   background-color: #fff;
+  border: 1px solid #e0e0e0; /* subtle border */
   border-radius: 20px;
   width: 100%;
-  height: max-content;
+  min-height: 50px; /* flexible height */
+  padding: 12px 16px; /* space inside */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* soft shadow */
+  font-size: 16px;
+  line-height: 1.5;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.PromptInput:focus {
+  outline: none;
+  border-color: #4f46e5; /* Indigo accent on focus */
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
 }
 
 .Statistic {
