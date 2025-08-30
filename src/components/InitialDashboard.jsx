@@ -4,6 +4,7 @@ import StatisticCard from './StatisticCard';
 import '../styles/InitialDashboard.css';
 import { BarChart } from './BarChart';
 import { LineChart } from './LineChart';
+import { PieChart } from './PieChart';
 
 export default function InitialDashboard(props) {
     const [selectedCard, setSelectedCard] = useState(null);
@@ -83,6 +84,20 @@ export default function InitialDashboard(props) {
                         { period: 'Sun', views: 8600 },
                     ]}
                     title="Post Views by Day"
+                />
+            )}
+            {selectedCard === 'likes' && (
+                <PieChart
+                    data={[
+                        { period: 'Mon', views: 4200 },
+                        { period: 'Tue', views: 3800 },
+                        { period: 'Wed', views: 5100 },
+                        { period: 'Thu', views: 6300 },
+                        { period: 'Fri', views: 7900 },
+                        { period: 'Sat', views: 9200 },
+                        { period: 'Sun', views: 8600 },
+                    ]}
+                    title="Likes Distribution"
                 />
             )}
         </view>
