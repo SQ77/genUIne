@@ -181,13 +181,13 @@ export function DynamicDashboard() {
 
                     <InitialDashboard selectedCard={selectedCard} period={period} />
                 </view>
-                <view
-                    bindtap={() => setIsChatOpen(true)}
-                    className="chat-button"
-                >
-                    <text className="chat-button-text">Chat</text>
-                </view>
             </scroll-view>
+            <view
+                bindtap={() => setIsChatOpen(true)}
+                className="chat-button"
+            >
+                <text className="chat-button-text">Chat</text>
+            </view>
         </view>
     );
 }
