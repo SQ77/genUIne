@@ -20,7 +20,8 @@ function detectTimestamp(message) {
         const diffDays = (current_date - date) / (1000 * 60 * 60 * 24); 
 
         const label = diffDays > 60 ? "months" : "days";
-        classifications.push({ text: result.text, label });
+        const range = label === "months" ? Math.ceil(diffDays / 30) : Math.ceil(diffDays);
+        classifications.push({ text: result.text, label, range });
     });
 
     return classifications;
