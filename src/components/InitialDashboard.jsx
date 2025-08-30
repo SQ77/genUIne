@@ -56,6 +56,24 @@ export default function InitialDashboard(props) {
                     isSelected={selectedCard === 'comments'}
                     onSelect={handleCardSelect}
                 />
+                <StatisticCard
+                    id="shares"
+                    title="Shares"
+                    statistic="850"
+                    changePercent={+3.5}
+                    changeValue={+30}
+                    isSelected={selectedCard === 'shares'}
+                    onSelect={handleCardSelect}
+                />
+                <StatisticCard
+                    id="unique-viewers"
+                    title="Unique Viewers"
+                    statistic="12.5K"
+                    changePercent={+5.1}
+                    changeValue={+600}
+                    isSelected={selectedCard === 'unique-viewers'}
+                    onSelect={handleCardSelect}
+                />
             </view>
             {selectedCard === 'profile-views' && (
                 <BarChart
