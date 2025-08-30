@@ -95,9 +95,9 @@ text {
         box-shadow 0.2s ease;
 }
 
-.StatisticCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+.StatisticCard.selected {
+    background-color: #f0f9ff;
+    border: 1px solid #38bdf8;
 }
 
 .StatisticCard-header {

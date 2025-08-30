@@ -1,13 +1,23 @@
 export default function StatisticCard({
+    id,
     title,
     statistic,
     changePercent,
     changeValue,
+    isSelected,
+    onSelect,
 }) {
     const isPositive = changePercent >= 0;
 
+    const handleTap = () => {
+        onSelect(id);
+    };
+
     return (
-        <view className="StatisticCard">
+        <view
+            className={`StatisticCard ${isSelected ? 'selected' : ''}`}
+            bindtap={handleTap}
+        >
             <view className="StatisticCard-header">
                 <text className="StatisticCard-title">{title}</text>
             </view>
