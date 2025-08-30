@@ -66,19 +66,6 @@ export function BarChart({ data = [], height = 400, title }) {
                 <text>0</text>
             </view>
 
-                {/* Y-axis line */}
-                <view
-                    style={{
-                        position: 'relative',
-                        left: '50px',
-                        top: '-470px',
-                        width: '2px',
-                        height: `${chartHeight}px`,
-                        backgroundColor: '#333',
-                        zIndex: 12,
-                    }}
-                />
-
                 {/* X-axis line */}
                 <view
                     style={{
