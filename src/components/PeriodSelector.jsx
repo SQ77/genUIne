@@ -1,11 +1,29 @@
 import { useState } from '@lynx-js/react';
 
-export default function PeriodSelector({ period, onChange }) {
+export default function PeriodSelector({ period, onChange, customTimeParsed }) {
     const [customAmount, setCustomAmount] = useState(period.amount);
 
     const handlePeriodChange = (time, amount) => {
         onChange({ time, amount });
         setCustomAmount(amount);
+    };
+
+    // Check if current period matches customTimeParsed
+    const isCustomActive = customTimeParsed && 
+        period.time === customTimeParsed.time && 
+        period.amount === customTimeParsed.amount;
+
+    // Generate custom button text
+    const getCustomButtonText = () => {
+        if (!customTimeParsed) return null;
+        
+        const { time, amount } = customTimeParsed;
+        if (time === 'days') {
+            return `Past ${amount} Days`;
+        } else if (time === 'months') {
+            return `Past ${amount} Month${amount > 1 ? 's' : ''}`;
+        }
+        return 'Custom';
     };
 
     return (
@@ -17,7 +35,8 @@ export default function PeriodSelector({ period, onChange }) {
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+            marginTop: '16px'
         }}>
             <text style={{ 
                 fontSize: '14px', 
@@ -73,22 +92,15 @@ export default function PeriodSelector({ period, onChange }) {
                 <text style={{ 
                     fontSize: '14px', 
                     fontWeight: '600', 
-                    color: '#374151', 
-                    marginRight: '16px' 
+                    color: period.time === 'days' && period.amount === 30 ? '#ffffff' : '#374151'
                 }}>
                     Past 30 Days
                 </text>
             </view>
-            <view className="custom-period" style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '8px',
-                marginLeft: '8px'
-            }}>
-                <text style={{ fontSize: '13px', color: '#64748b' }}>Custom</text>
+            {customTimeParsed && (
                 <view
-                    className={period.time === 'days' && period.amount === customAmount ? 'period-active' : 'period-button'}
-                    bindtap={() => handlePeriodChange('days', customAmount)}
+                    className={isCustomActive ? 'period-active' : 'period-button'}
+                    bindtap={() => handlePeriodChange(customTimeParsed.time, customTimeParsed.amount)}
                     style={{ 
                         display: 'inline-flex', 
                         cursor: 'pointer', 
@@ -97,15 +109,21 @@ export default function PeriodSelector({ period, onChange }) {
                         fontSize: '13px',
                         fontWeight: '500',
                         transition: 'all 0.2s ease',
-                        backgroundColor: period.time === 'days' && period.amount === customAmount ? '#667eea' : '#f8fafc',
-                        color: period.time === 'days' && period.amount === customAmount ? '#ffffff' : '#64748b',
+                        backgroundColor: isCustomActive ? '#667eea' : '#f8fafc',
+                        color: isCustomActive ? '#ffffff' : '#64748b',
                         border: '1px solid',
-                        borderColor: period.time === 'days' && period.amount === customAmount ? '#667eea' : '#e2e8f0'
+                        borderColor: isCustomActive ? '#667eea' : '#e2e8f0'
                     }}
                 >
-                    Apply
+                    <text style={{ 
+                        fontSize: '14px', 
+                        fontWeight: '600', 
+                        color: isCustomActive ? '#ffffff' : '#374151'
+                    }}>
+                        {getCustomButtonText()}
+                    </text>
                 </view>
-            </view>
+            )}
         </view>
     );
 }

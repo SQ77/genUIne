@@ -16,6 +16,8 @@ export function DynamicDashboard() {
         amount: 7
     })
 
+    const [customTimeParsed, setCustomTimeParsed] = useState(null);
+
     // Mock data - replace with real API calls
     useEffect(() => {
         const mockStats = createCreatorStats({
@@ -58,7 +60,7 @@ export function DynamicDashboard() {
     return (
         <view className="dashboard-container">
             <view className="dashboard-main">
-                <PeriodSelector period={period} onChange={setPeriod} />
+                <PeriodSelector period={period} onChange={setPeriod} customTimeParsed={customTimeParsed} />
                 <view
                     className="dashboard-grid"
                     style={{ position: 'relative', minHeight: '600px' }}
