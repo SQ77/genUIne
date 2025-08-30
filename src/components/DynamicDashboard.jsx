@@ -93,20 +93,26 @@ export function DynamicDashboard() {
         setCustomTimeParsed(null);
     };
 
+    const toTitleCase = (str) => {
+        return str
+            .split(' ')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
+
     const updateComponentsFromMetrics = (metrics) => {
         if (!metrics || !Array.isArray(metrics)) return;
 
-        // Create a mapping function to convert metric text to component format
+        // Mapping function to convert metric text to component format
         const createComponentFromMetric = (metric, index) => {
-            // Generate a unique ID based on the metric text
             const id = metric.text.toLowerCase().replace(/\s+/g, '-');
 
             return {
                 id: id,
                 type: 'metric',
                 data: {
-                    title: metric.text,
-                    statistic: metric.value || '0', // Use metric.value if available
+                    title: toTitleCase(metric.text),
+                    statistic: metric.value || '0', 
                     changePercent: metric.changePercent || 0,
                     changeValue: metric.changeValue || 0,
                 },
@@ -128,7 +134,7 @@ export function DynamicDashboard() {
             changePercent: component.data.changePercent,
             changeValue: component.data.changeValue,
             isSelected: selectedCard === component.id,
-            period: period, // Pass period to StatisticCard
+            period: period, 
             onSelect: (cardId) => {
                 // Toggle selection
                 setSelectedCard(selectedCard === cardId ? null : cardId);
@@ -179,7 +185,10 @@ export function DynamicDashboard() {
                         )}
                     </view>
 
-                    <InitialDashboard selectedCard={selectedCard} period={period} />
+                    <InitialDashboard
+                        selectedCard={selectedCard}
+                        period={period}
+                    />
                 </view>
                 <view
                     bindtap={() => setIsChatOpen(true)}
