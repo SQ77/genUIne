@@ -39,7 +39,7 @@ export default function PeriodSelector({ period, onChange, customTimeParsed }) {
             marginTop: '16px'
         }}>
             <text style={{ 
-                fontSize: '14px', 
+                fontSize: '10px', 
                 fontWeight: '600', 
                 color: '#374151', 
                 marginRight: '16px' 
@@ -64,7 +64,7 @@ export default function PeriodSelector({ period, onChange, customTimeParsed }) {
                 }}
             >
                 <text style={{ 
-                    fontSize: '14px', 
+                    fontSize: '10px', 
                     fontWeight: '600', 
                     color: '#374151', 
                     marginRight: '16px' 
@@ -90,7 +90,7 @@ export default function PeriodSelector({ period, onChange, customTimeParsed }) {
                 }}
             >
                 <text style={{ 
-                    fontSize: '14px', 
+                    fontSize: '10px', 
                     fontWeight: '600', 
                     color: period.time === 'days' && period.amount === 30 ? '#ffffff' : '#374151'
                 }}>
