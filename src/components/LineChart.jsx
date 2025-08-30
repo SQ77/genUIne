@@ -60,152 +60,127 @@ export function LineChart({ data = [], height = 400, title }) {
                 {title}
             </text>
 
-           
-                {/* Y-axis labels */}
+
+            {/* Y-axis labels */}
+            <view
+                style={{
+                    position: 'absolute',
+                    left: '10px',
+                    top: '50px',
+                    height: `${chartHeight}px`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    fontSize: '12px',
+                    color: '#666',
+                    backgroundColor: '#fafafa',
+                    paddingRight: '8px',
+                }}
+            >
+                <text>{formatValue(maxValue)}</text>
+                <text>{formatValue(maxValue * 0.75)}</text>
+                <text>{formatValue(maxValue * 0.5)}</text>
+                <text>{formatValue(maxValue * 0.25)}</text>
+                <text>0</text>
+            </view>
+
+            {/* Chart area with horizontal scroll */}
+            <scroll-view
+                scroll-orientation="horizontal"
+                style={{
+                    left: '50px',
+                    top: '20px',
+                    right: '10px',
+                    height: `${chartHeight}px`,
+                    borderLeft: '2px solid #ddd',
+                    borderBottom: '2px solid #ddd',
+                    overflow: 'hidden',
+                    width: "80%"
+                }}
+            >
+                {/* Scrollable content container */}
                 <view
                     style={{
-                        position: 'absolute',
-                        left: '10px',
-                        top: '50px',
+                        width: `${contentWidth}px`,
                         height: `${chartHeight}px`,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        fontSize: '12px',
-                        color: '#666',
-                        backgroundColor: '#fafafa',
-                        paddingRight: '8px',
-                    }}
-                > 
-                    <text>{formatValue(maxValue)}</text>
-                    <text>{formatValue(maxValue * 0.75)}</text>
-                    <text>{formatValue(maxValue * 0.5)}</text>
-                    <text>{formatValue(maxValue * 0.25)}</text>
-                    <text>0</text>
-                </view>
-
-                {/* Chart area with horizontal scroll */}
-                <scroll-view
-                    scroll-orientation="horizontal"
-                    style={{
-                        left: '50px',
-                        top: '20px',
-                        right: '10px',
-                        height: `${chartHeight}px`,
-                        borderLeft: '2px solid #ddd',
-                        borderBottom: '2px solid #ddd',
-                        overflow: 'hidden',
+                        position: 'relative',
                     }}
                 >
-                    {/* Scrollable content container */}
-                    <view
-                        style={{
-                            width: `${contentWidth}px`,
-                            height: `${chartHeight}px`,
-                            position: 'relative',
-                        }}
-                    >
-                        {/* Grid lines */}
-                        <view
-                            style={{
-                                top: '0',
-                                left: '0',
-                                width: '100%',
-                                height: '100%',
-                                pointerEvents: 'none',
-                            }}
-                        >
-                            {[0, 0.25, 0.5, 0.75, 1].map((percent) => (
-                                <view
-                                    key={percent}
-                                    style={{
-                                        position: 'relative',
-                                        bottom: `${percent * 100}%`,
-                                        left: '0',
-                                        right: '0',
-                                        height: '1px',
-                                        backgroundColor:
-                                            percent === 0 ? '#ddd' : '#f0f0f0',
-                                    }}
-                                />
-                            ))}
-                        </view>
 
-                        {/* Line segments */}
-                        {lineSegments.map((segment, index) => (
+                    {/* Line segments */}
+                    {lineSegments.map((segment, index) => (
+                        <view
+                            key={`line-${index}`}
+                            style={{
+                                position: 'absolute',
+                                left: `${segment.x}px`,
+                                top: `${segment.y}px`,
+                                width: `${segment.length}px`,
+                                height: '3px',
+                                backgroundColor: '#0ea5e9',
+                                transformOrigin: '0 50%',
+                                transform: `rotate(${segment.angle}deg)`,
+                                borderRadius: '1.5px',
+                            }}
+                        />
+                    ))}
+
+                    {/* Data points and labels */}
+                    {points.map((point, index) => (
+                        <view key={index}>
+                            {/* Value label */}
                             <view
-                                key={`line-${index}`}
                                 style={{
                                     position: 'absolute',
-                                    left: `${segment.x}px`,
-                                    top: `${segment.y}px`,
-                                    width: `${segment.length}px`,
-                                    height: '3px',
+                                    left: `${point.x - 25}px`,
+                                    top: `${point.y - 25}px`,
+                                    width: '50px',
+                                    fontSize: '10px',
+                                    fontWeight: 'bold',
+                                    textAlign: 'center',
+                                    backgroundColor:
+                                        'rgba(240, 249, 255, 0.9)',
+                                    padding: '2px 4px',
+                                }}
+                            >
+                                <text>{formatValue(point.value)}</text>
+                            </view>
+
+                            {/* Data point circle */}
+                            <view
+                                style={{
+                                    left: `${point.x - pointRadius}px`,
+                                    top: `${point.y - pointRadius}px`,
+                                    width: `${pointRadius * 2}px`,
+                                    height: `${pointRadius * 2}px`,
                                     backgroundColor: '#0ea5e9',
-                                    transformOrigin: '0 50%',
-                                    transform: `rotate(${segment.angle}deg)`,
-                                    borderRadius: '1.5px',
+                                    borderRadius: '50%',
+                                    border: '2px solid #fff',
+                                    boxShadow:
+                                        '0 2px 4px rgba(14, 165, 233, 0.3)',
+                                    cursor: 'pointer',
+                                    zIndex: 5,
                                 }}
                             />
-                        ))}
 
-                        {/* Data points and labels */}
-                        {points.map((point, index) => (
-                            <view key={index}>
-                                {/* Value label above point */}
-                                <view
-                                    style={{
-                                        position: 'absolute',
-                                        left: `${point.x - 25}px`,
-                                        top: `${point.y - 25}px`,
-                                        width: '50px',
-                                        fontSize: '10px',
-                                        fontWeight: 'bold',
-                                        textAlign: 'center',
-                                        backgroundColor:
-                                            'rgba(240, 249, 255, 0.9)',
-                                        padding: '2px 4px',
-                                    }}
-                                >
-                                    <text>{formatValue(point.value)}</text>
-                                </view>
-
-                                {/* Data point circle */}
-                                <view
-                                    style={{
-                                        position: 'absolute',
-                                        left: `${point.x - pointRadius}px`,
-                                        top: `${point.y - pointRadius}px`,
-                                        width: `${pointRadius * 2}px`,
-                                        height: `${pointRadius * 2}px`,
-                                        backgroundColor: '#0ea5e9',
-                                        borderRadius: '50%',
-                                        border: '2px solid #fff',
-                                        boxShadow:
-                                            '0 2px 4px rgba(14, 165, 233, 0.3)',
-                                        cursor: 'pointer',
-                                    }}
-                                />
-
-                                {/* X-axis label below chart area */}
-                                <view
-                                    style={{
-                                        position: 'absolute',
-                                        left: `${point.x - 30}px`,
-                                        top: `${chartHeight + 8}px`,
-                                        width: '60px',
-                                        fontSize: '11px',
-                                        color: '#0369a1',
-                                        textAlign: 'center',
-                                        fontWeight: '500',
-                                    }}
-                                >
-                                    <text>{point.item.period}</text>
-                                </view>
+                            {/* X-axis label */}
+                            <view
+                                style={{
+                                    left: `${point.x - 30}px`,
+                                    top: `${chartHeight + 8}px`,
+                                    width: '60px',
+                                    fontSize: '11px',
+                                    color: '#0369a1',
+                                    textAlign: 'center',
+                                    fontWeight: '500',
+                                }}
+                            >
+                                <text>{point.item.period}</text>
                             </view>
-                        ))}
-                    </view>
-                </scroll-view>
-            </view>
+                        </view>
+                    ))}
+                </view>
+            </scroll-view>
+        </view>
     );
 }
