@@ -5,8 +5,8 @@ export function BarChart({ data = [], height = 400, title }) {
         ...data.map((d) => d.views || d.profileViews || 0),
     );
     const chartHeight = height - 80;
-    const barWidth = 60; 
-    const barGap = 15; 
+    const barWidth = 60;
+    const barGap = 15;
 
     // Calculate total content width for scrolling
     const totalBarsWidth = barWidth * data.length + barGap * (data.length - 1);
@@ -75,7 +75,7 @@ export function BarChart({ data = [], height = 400, title }) {
                         left: '50px',
                         top: '20px',
                         right: '10px',
-                        height: `${chartHeight + 40}px`,
+                        height: `${chartHeight}px`,
                         borderLeft: '2px solid #ddd',
                         borderBottom: '2px solid #ddd',
                         overflow: 'hidden',
