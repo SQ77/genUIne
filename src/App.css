@@ -1,18 +1,6 @@
 :root {
-    background-color: #000;
-    --color-text: #fff;
-}
-
-.Background {
-    position: fixed;
-    background: grey;
-    box-shadow: 0px 12.93px 28.74px 0px #ffd28db2 inset;
-    border-radius: 50%;
-    width: 200vw;
-    height: 200vw;
-    top: -60vw;
-    left: -14.27vw;
-    transform: rotate(15.25deg);
+    background-color: #fff;
+    --color-text: #000;
 }
 
 .App {
@@ -62,20 +50,14 @@ text {
     margin: 15rpx;
 }
 
-.Hint {
-    font-size: 12px;
-    margin: 5px;
-    color: rgba(255, 255, 255, 0.65);
-}
-
 .PromptInput {
     background-color: #fff;
-    border: 1px solid #e0e0e0; /* subtle border */
+    border: 1px solid #e0e0e0;
     border-radius: 20px;
     width: 100%;
-    min-height: 50px; /* flexible height */
-    padding: 12px 16px; /* space inside */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* soft shadow */
+    min-height: 50px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     font-size: 16px;
     line-height: 1.5;
     transition:
@@ -85,7 +67,7 @@ text {
 
 .PromptInput:focus {
     outline: none;
-    border-color: #4f46e5; /* Indigo accent on focus */
+    border-color: #4f46e5;
     box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
 }
 
@@ -140,11 +122,11 @@ text {
 }
 
 .StatisticCard-change.positive {
-    color: #16a34a; /* green */
+    color: #16a34a;
 }
 
 .StatisticCard-change.negative {
-    color: #dc2626; /* red */
+    color: #dc2626;
 }
 
 .StatisticCard-arrow {
