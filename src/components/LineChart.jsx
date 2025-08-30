@@ -91,7 +91,7 @@ export function LineChart({ data = [], height = 400, title }) {
                     left: '50px',
                     top: '20px',
                     right: '10px',
-                    height: `${chartHeight + 30}px`,
+                    height: `${chartHeight}px`,
                     borderLeft: '2px solid #ddd',
                     borderBottom: '2px solid #ddd',
                     overflow: 'hidden',
@@ -132,7 +132,7 @@ export function LineChart({ data = [], height = 400, title }) {
                             <view
                                 style={{
                                     position: 'absolute',
-                                    left: `${point.x}px`,
+                                    left: `${point.x - 25}px`,
                                     top: `${point.y}px`,
                                     width: '50px',
                                     fontSize: '10px',
@@ -146,6 +146,24 @@ export function LineChart({ data = [], height = 400, title }) {
                                 <text>{formatValue(point.value)}</text>
                             </view>
 
+                            {/* Data point circle */}
+                            <view
+                                style={{
+                                    position: 'absolute',
+                                    left: `${point.x - pointRadius}px`,
+                                    top: `${point.y - pointRadius}px`,
+                                    width: `${pointRadius * 2}px`,
+                                    height: `${pointRadius * 2}px`,
+                                    backgroundColor: '#0ea5e9',
+                                    borderRadius: '50%',
+                                    border: '2px solid #fff',
+                                    boxShadow:
+                                        '0 2px 4px rgba(14, 165, 233, 0.3)',
+                                    cursor: 'pointer',
+                                    zIndex: 5,
+                                }}
+                            />
+
                             {/* X-axis label */}
                             <view
                                 style={{
@@ -154,7 +172,7 @@ export function LineChart({ data = [], height = 400, title }) {
                                     top: `${chartHeight + 8}px`,
                                     width: '60px',
                                     fontSize: '11px',
-                                    color: 'black',
+                                    color: '#0369a1',
                                     textAlign: 'center',
                                     fontWeight: '500',
                                 }}

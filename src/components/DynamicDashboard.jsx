@@ -93,26 +93,20 @@ export function DynamicDashboard() {
         setCustomTimeParsed(null);
     };
 
-    const toTitleCase = (str) => {
-        return str
-            .split(' ')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    };
-
     const updateComponentsFromMetrics = (metrics) => {
         if (!metrics || !Array.isArray(metrics)) return;
 
-        // Mapping function to convert metric text to component format
+        // Create a mapping function to convert metric text to component format
         const createComponentFromMetric = (metric, index) => {
+            // Generate a unique ID based on the metric text
             const id = metric.text.toLowerCase().replace(/\s+/g, '-');
 
             return {
                 id: id,
                 type: 'metric',
                 data: {
-                    title: toTitleCase(metric.text),
-                    statistic: metric.value || '0', 
+                    title: metric.text,
+                    statistic: metric.value || '0', // Use metric.value if available
                     changePercent: metric.changePercent || 0,
                     changeValue: metric.changeValue || 0,
                 },
@@ -134,7 +128,7 @@ export function DynamicDashboard() {
             changePercent: component.data.changePercent,
             changeValue: component.data.changeValue,
             isSelected: selectedCard === component.id,
-            period: period, 
+            period: period, // Pass period to StatisticCard
             onSelect: (cardId) => {
                 // Toggle selection
                 setSelectedCard(selectedCard === cardId ? null : cardId);
@@ -185,10 +179,7 @@ export function DynamicDashboard() {
                         )}
                     </view>
 
-                    <InitialDashboard
-                        selectedCard={selectedCard}
-                        period={period}
-                    />
+                    <InitialDashboard selectedCard={selectedCard} period={period} />
                 </view>
             </scroll-view>
             <view
