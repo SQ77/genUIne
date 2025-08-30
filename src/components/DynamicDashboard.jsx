@@ -112,7 +112,7 @@ export function DynamicDashboard() {
                 type: 'metric',
                 data: {
                     title: toTitleCase(metric.text),
-                    statistic: metric.value || '0', 
+                    statistic: metric.value || '0',
                     changePercent: metric.changePercent || 0,
                     changeValue: metric.changeValue || 0,
                 },
@@ -134,7 +134,7 @@ export function DynamicDashboard() {
             changePercent: component.data.changePercent,
             changeValue: component.data.changeValue,
             isSelected: selectedCard === component.id,
-            period: period, 
+            period: period,
             onSelect: (cardId) => {
                 // Toggle selection
                 setSelectedCard(selectedCard === cardId ? null : cardId);
@@ -161,11 +161,13 @@ export function DynamicDashboard() {
                 className="dashboard-main"
             >
                 <text className="title">Analytics</text>
-                <PeriodSelector
-                    period={period}
-                    onChange={setPeriod}
-                    customTimeParsed={customTimeParsed}
-                />
+                <view>
+                    <PeriodSelector
+                        period={period}
+                        onChange={setPeriod}
+                        customTimeParsed={customTimeParsed}
+                    />
+                </view>
                 <view className="dashboard-content">
                     <view
                         className="dashboard-grid"

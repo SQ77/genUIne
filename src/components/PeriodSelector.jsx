@@ -27,17 +27,7 @@ export default function PeriodSelector({ period, onChange, customTimeParsed }) {
     };
 
     return (
-        <view className="period-selector" style={{ 
-            height: '40px', 
-            backgroundColor: '#ffffff', 
-            padding: '12px 24px', 
-            borderBottom: '1px solid #e2e8f0',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            marginTop: '16px'
-        }}>
+        <view className="period-selector">
             <text style={{ 
                 fontSize: '10px', 
                 fontWeight: '600', 
