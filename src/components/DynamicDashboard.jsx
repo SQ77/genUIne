@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from '@lynx-js/react';
 import { ChatInterface } from './ChatInterface';
 import StatisticCard from './StatisticCard';
 import InitialDashboard from './InitialDashboard';
+import PeriodSelector from './PeriodSelector'
 import { createCreatorStats } from '../utils/types';
 
 import '../styles/DynamicDashboard.css';
@@ -10,6 +11,12 @@ export function DynamicDashboard() {
     const [components, setComponents] = useState([]);
     const [creatorStats, setCreatorStats] = useState(createCreatorStats());
     const [isChatOpen, setIsChatOpen] = useState(false);
+    const [period, setPeriod] = useState({
+        time: 'days', // days or months
+        amount: 7
+    })
+
+    const [customTimeParsed, setCustomTimeParsed] = useState(null);
 
     // Mock data - replace with real API calls
     useEffect(() => {
@@ -53,6 +60,7 @@ export function DynamicDashboard() {
     return (
         <view className="dashboard-container">
             <view className="dashboard-main">
+                <PeriodSelector period={period} onChange={setPeriod} customTimeParsed={customTimeParsed} />
                 <view
                     className="dashboard-grid"
                     style={{ position: 'relative', minHeight: '600px' }}
