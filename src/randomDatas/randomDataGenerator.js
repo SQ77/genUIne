@@ -16,18 +16,18 @@ function generateMetricData() {
   months.push(sumTail(days, 30));
 
   return {
-    last_100_days: days,
-    last_100_months: months,
+    days: days,
+    months: months,
   };
 }
 
 const METRICS = [
-  "post views",
-  "profile views",
+  "post-views",
+  "profile-views",
   "likes",
   "comments",
   "shares",
-  "unique viewers"
+  "unique-viewers"
 ];
 
 const metricData = {};
@@ -39,6 +39,6 @@ fs.writeFileSync('metric_data.json', JSON.stringify(metricData, null, 2), 'utf8'
 console.log('Wrote metric_data.json!');
 
 // Optionally, print check for one metric
-const metric = "post views";
-console.log('Last month value (should be sum of last 30 days):', metricData[metric].last_100_months[99]);
-console.log('Sum of last 30 days:', metricData[metric].last_100_days.slice(-30).reduce((a, b) => a + b, 0));
+const metric = "post-views";
+console.log('Last month value (should be sum of last 30 days):', metricData[metric].months[99]);
+console.log('Sum of last 30 days:', metricData[metric].days.slice(-30).reduce((a, b) => a + b, 0));
