@@ -93,7 +93,7 @@ export function ChatInterface({
 
             setMessages((prev) => [
                 ...prev,
-                { role: 'assistant', content: "SUCCESS!!!"},
+                { role: 'assistant', content: JSON.stringify(response)},
             ]);
 
         } catch (error) {
