@@ -7,7 +7,14 @@ import {
 import '../styles/ChatInterface.css';
 import parseUserinput from '../api/backend';
 
-export function ChatInterface({ isOpen, onClose, onSend, onConfirm, onMetricsUpdate }) {
+export function ChatInterface({
+    isOpen,
+    onClose,
+    onSend,
+    onConfirm,
+    onMetricsUpdate,
+    onReset,
+}) {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -77,6 +84,16 @@ export function ChatInterface({ isOpen, onClose, onSend, onConfirm, onMetricsUpd
 
         setInput('');
         setIsLoading(true);
+
+        if (message.toLowerCase().includes('reset')) {
+            onReset();
+            setIsLoading(false);
+            setMessages((prev) => [
+                ...prev,
+                { role: 'assistant', content: "Done! Your dashboard has been reset." },
+            ]);
+            return;
+        }
 
         try {
             const response = parseUserinput(message);
