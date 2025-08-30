@@ -136,6 +136,7 @@ export function DynamicDashboard() {
     return (
         <view className="dashboard-container">
             <view className="dashboard-main">
+                <text className="title">Analytics</text>
                 <PeriodSelector period={period} onChange={setPeriod} customTimeParsed={customTimeParsed} />
                 <view
                     className="dashboard-grid"
