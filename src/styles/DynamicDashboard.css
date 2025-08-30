@@ -40,22 +40,24 @@
 }
 
 .chat-button {
-    position: fixed; 
+    position: fixed;
     bottom: 24px; /* distance from bottom */
     right: 24px; /* distance from right */
-    background-color: #0ea5e9; 
-    color: #fff; 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     font-weight: 600;
-    padding: 14px 20px; 
-    border-radius: 50px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    padding: 14px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; 
+    z-index: 1000;
     cursor: pointer;
     transition:
         transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background-color 0.2s ease;
+        box-shadow 0.2s ease;
+}
+
+.chat-button-text {
+    color: #fff;
 }

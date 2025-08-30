@@ -274,7 +274,6 @@
 
 .send-button {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
     border: none;
     border-radius: 12px;
     padding: 12px 20px;
@@ -288,17 +287,7 @@
     justify-content: center;
 }
 
-.send-button:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+.send-button-text {
+    color: white;
 }
 
-.send-button:active:not(:disabled) {
-    transform: translateY(0);
-}
-
-.send-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}

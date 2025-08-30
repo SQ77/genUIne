@@ -197,7 +197,7 @@ export function ChatInterface({
                             className="send-button"
                             bindtap={() => handleSendMessage(input)}
                         >
-                            <text>Send</text>
+                            <text className="send-button-text">Send</text>
                         </view>
                     </view>
                 </view>

@@ -72,7 +72,7 @@ export function DynamicDashboard() {
                         bindtap={() => setIsChatOpen(true)}
                         className="chat-button"
                     >
-                        <text>Chat</text>
+                        <text className="chat-button-text">Chat</text>
                     </view>
                 </view>
             </view>
