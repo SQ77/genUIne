@@ -115,7 +115,7 @@ export function ChatInterface({
 
             setMessages((prev) => [
                 ...prev,
-                { role: 'assistant', content: JSON.stringify(response) },
+                { role: 'assistant', content: response.response },
             ]);
         } catch (error) {
             setMessages((prev) => [
