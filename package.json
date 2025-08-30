@@ -11,7 +11,9 @@
         "test": "vitest run"
     },
     "dependencies": {
-        "@lynx-js/react": "^0.112.4"
+        "@lynx-js/react": "^0.112.4",
+        "chrono-node": "^2.8.4",
+        "spacy": "^0.0.4"
     },
     "devDependencies": {
         "@eslint/js": "^9.32.0",
