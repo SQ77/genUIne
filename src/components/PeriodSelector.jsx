@@ -29,7 +29,7 @@ export default function PeriodSelector({ period, onChange }) {
             </text>
             <view
                 className={period.time === 'days' && period.amount === 7 ? 'period-active' : 'period-button'}
-                bindTap={() => handlePeriodChange('days', 7)}
+                bindtap={() => handlePeriodChange('days', 7)}
                 style={{ 
                     display: 'inline-flex', 
                     cursor: 'pointer', 
@@ -55,7 +55,7 @@ export default function PeriodSelector({ period, onChange }) {
             </view>
             <view
                 className={period.time === 'days' && period.amount === 30 ? 'period-active' : 'period-button'}
-                bindTap={() => handlePeriodChange('days', 30)}
+                bindtap={() => handlePeriodChange('days', 30)}
                 style={{ 
                     display: 'inline-flex', 
                     cursor: 'pointer', 
@@ -88,7 +88,7 @@ export default function PeriodSelector({ period, onChange }) {
                 <text style={{ fontSize: '13px', color: '#64748b' }}>Custom</text>
                 <view
                     className={period.time === 'days' && period.amount === customAmount ? 'period-active' : 'period-button'}
-                    onClick={() => handlePeriodChange('days', customAmount)}
+                    bindtap={() => handlePeriodChange('days', customAmount)}
                     style={{ 
                         display: 'inline-flex', 
                         cursor: 'pointer', 
