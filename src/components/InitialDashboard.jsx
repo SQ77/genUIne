@@ -2,6 +2,7 @@ import { useState } from '@lynx-js/react';
 import StatisticCard from './StatisticCard';
 
 import '../styles/InitialDashboard.css';
+import { BarChart } from './BarChart';
 
 export default function InitialDashboard(props) {
     const [selectedCard, setSelectedCard] = useState(null);
@@ -54,6 +55,19 @@ export default function InitialDashboard(props) {
                     onSelect={handleCardSelect}
                 />
             </view>
+            <BarChart
+                data={[
+                    { month: 'Jan', views: 1200 },
+                    { month: 'Feb', views: 1800 },
+                    { month: 'Mar', views: 2400 },
+                    { month: 'Apr', views: 1900 },
+                    { month: 'May', views: 3200 },
+                    { month: 'Jun', views: 2800 },
+                    { month: 'Jul', views: 3600 },
+                    { month: 'Aug', views: 4200 },
+                ]}
+                title="Profile Views by Month"
+            />
         </view>
     );
 }
