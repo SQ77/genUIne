@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from '@lynx-js/react';
 import { ChatInterface } from './ChatInterface';
 import StatisticCard from './StatisticCard';
 import InitialDashboard from './InitialDashboard';
-import PeriodSelector from './PeriodSelector'
+import PeriodSelector from './PeriodSelector';
 import { createCreatorStats } from '../utils/types';
 
 import '../styles/DynamicDashboard.css';
@@ -16,9 +16,9 @@ export function DynamicDashboard() {
                 title: 'Post Views',
                 statistic: '82.3K',
                 changePercent: 7.9,
-                changeValue: +6000
+                changeValue: +6000,
             },
-            config: {}
+            config: {},
         },
         {
             id: 'profile-views',
@@ -27,9 +27,9 @@ export function DynamicDashboard() {
                 title: 'Profile Views',
                 statistic: '4.6K',
                 changePercent: -2.1,
-                changeValue: -100
+                changeValue: -100,
             },
-            config: {}
+            config: {},
         },
         {
             id: 'likes',
@@ -38,9 +38,9 @@ export function DynamicDashboard() {
                 title: 'Likes',
                 statistic: '3.4K',
                 changePercent: +4.2,
-                changeValue: +140
+                changeValue: +140,
             },
-            config: {}
+            config: {},
         },
         {
             id: 'comments',
@@ -49,9 +49,9 @@ export function DynamicDashboard() {
                 title: 'Comments',
                 statistic: '1.2K',
                 changePercent: -1.6,
-                changeValue: -20
+                changeValue: -20,
             },
-            config: {}
+            config: {},
         },
         {
             id: 'shares',
@@ -60,9 +60,9 @@ export function DynamicDashboard() {
                 title: 'Shares',
                 statistic: '850',
                 changePercent: +3.5,
-                changeValue: +30
+                changeValue: +30,
             },
-            config: {}
+            config: {},
         },
         {
             id: 'unique-viewers',
@@ -71,18 +71,18 @@ export function DynamicDashboard() {
                 title: 'Unique Viewers',
                 statistic: '12.5K',
                 changePercent: +5.1,
-                changeValue: +600
+                changeValue: +600,
             },
-            config: {}
-        }
+            config: {},
+        },
     ]);
     const [creatorStats, setCreatorStats] = useState(createCreatorStats());
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
     const [period, setPeriod] = useState({
         time: 'days', // days or months
-        amount: 7
-    })
+        amount: 7,
+    });
 
     const [customTimeParsed, setCustomTimeParsed] = useState(null);
 
@@ -135,9 +135,16 @@ export function DynamicDashboard() {
 
     return (
         <view className="dashboard-container">
-            <view className="dashboard-main">
+            <scroll-view
+                scroll-orientation="vertical"
+                className="dashboard-main"
+            >
                 <text className="title">Analytics</text>
-                <PeriodSelector period={period} onChange={setPeriod} customTimeParsed={customTimeParsed} />
+                <PeriodSelector
+                    period={period}
+                    onChange={setPeriod}
+                    customTimeParsed={customTimeParsed}
+                />
                 <view className="dashboard-content">
                     <view
                         className="dashboard-grid"
@@ -164,8 +171,7 @@ export function DynamicDashboard() {
                 >
                     <text className="chat-button-text">Chat</text>
                 </view>
-
-            </view>
+            </scroll-view>
         </view>
     );
 }
