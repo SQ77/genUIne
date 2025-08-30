@@ -1,5 +1,4 @@
 import { useState } from '@lynx-js/react';
-import '../styles/PeriodSelector.css';
 
 export default function PeriodSelector({ period, onChange, customTimeParsed }) {
     const [customAmount, setCustomAmount] = useState(period.amount);
@@ -28,32 +27,99 @@ export default function PeriodSelector({ period, onChange, customTimeParsed }) {
     };
 
     return (
-        <view className="period-selector">
-            <text className="period-selector-label">
+        <view className="period-selector" style={{ 
+            height: '40px', 
+            backgroundColor: '#ffffff', 
+            padding: '12px 24px', 
+            borderBottom: '1px solid #e2e8f0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+            marginTop: '16px'
+        }}>
+            <text style={{ 
+                fontSize: '10px', 
+                fontWeight: '600', 
+                color: '#374151', 
+                marginRight: '16px' 
+            }}>
                 Time Period:
             </text>
             <view
-                className={period.time === 'days' && period.amount === 7 ? 'period-button active' : 'period-button'}
+                className={period.time === 'days' && period.amount === 7 ? 'period-active' : 'period-button'}
                 bindtap={() => handlePeriodChange('days', 7)}
+                style={{ 
+                    display: 'inline-flex', 
+                    cursor: 'pointer', 
+                    padding: '8px 16px',
+                    borderRadius: '6px',
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    transition: 'all 0.2s ease',
+                    backgroundColor: period.time === 'days' && period.amount === 7 ? '#667eea' : '#f8fafc',
+                    color: period.time === 'days' && period.amount === 7 ? '#ffffff' : '#64748b',
+                    border: '1px solid',
+                    borderColor: period.time === 'days' && period.amount === 7 ? '#667eea' : '#e2e8f0'
+                }}
             >
-                <text className="period-button-text">
+                <text style={{ 
+                    fontSize: '10px', 
+                    fontWeight: '600', 
+                    color: '#374151', 
+                    marginRight: '16px' 
+                }}>
                     Past 7 Days
                 </text>
             </view>
             <view
-                className={period.time === 'days' && period.amount === 30 ? 'period-button active' : 'period-button'}
+                className={period.time === 'days' && period.amount === 30 ? 'period-active' : 'period-button'}
                 bindtap={() => handlePeriodChange('days', 30)}
+                style={{ 
+                    display: 'inline-flex', 
+                    cursor: 'pointer', 
+                    padding: '8px 16px',
+                    borderRadius: '6px',
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    transition: 'all 0.2s ease',
+                    backgroundColor: period.time === 'days' && period.amount === 30 ? '#667eea' : '#f8fafc',
+                    color: period.time === 'days' && period.amount === 30 ? '#ffffff' : '#64748b',
+                    border: '1px solid',
+                    borderColor: period.time === 'days' && period.amount === 30 ? '#667eea' : '#e2e8f0'
+                }}
             >
-                <text className="period-button-text">
+                <text style={{ 
+                    fontSize: '10px', 
+                    fontWeight: '600', 
+                    color: period.time === 'days' && period.amount === 30 ? '#ffffff' : '#374151'
+                }}>
                     Past 30 Days
                 </text>
             </view>
             {customTimeParsed && (
                 <view
-                    className={isCustomActive ? 'period-button active' : 'period-button'}
+                    className={isCustomActive ? 'period-active' : 'period-button'}
                     bindtap={() => handlePeriodChange(customTimeParsed.time, customTimeParsed.amount)}
+                    style={{ 
+                        display: 'inline-flex', 
+                        cursor: 'pointer', 
+                        padding: '8px 16px',
+                        borderRadius: '6px',
+                        fontSize: '13px',
+                        fontWeight: '500',
+                        transition: 'all 0.2s ease',
+                        backgroundColor: isCustomActive ? '#667eea' : '#f8fafc',
+                        color: isCustomActive ? '#ffffff' : '#64748b',
+                        border: '1px solid',
+                        borderColor: isCustomActive ? '#667eea' : '#e2e8f0'
+                    }}
                 >
-                    <text className="period-button-text">
+                    <text style={{ 
+                        fontSize: '14px', 
+                        fontWeight: '600', 
+                        color: isCustomActive ? '#ffffff' : '#374151'
+                    }}>
                         {getCustomButtonText()}
                     </text>
                 </view>

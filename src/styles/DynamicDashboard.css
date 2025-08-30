@@ -4,15 +4,13 @@
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #f8fafc;
-    /* REMOVED overflow: hidden - this was breaking scroll */
+    overflow: hidden; /* only inner content scrolls */
 }
 
 .dashboard-main {
     display: flex;
     flex-direction: column;
-    height: 100vh !important; /* fill container */
-    overflow-y: auto !important;
-    position: relative !important;
+    height: 100%; /* fill container */
 }
 
 .dashboard-content {
@@ -85,14 +83,7 @@
 .period-selector {
     background-color: #fff;
     border-bottom: 1px solid #e2e8f0;
-    z-index: auto !important;
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-    float: none !important;
+    z-index: 10;
 }
 
 .period-button:hover {
