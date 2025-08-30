@@ -8,22 +8,22 @@ With genUIne, creators can describe the insights they want in plain English, and
 
 ## 🚀 Features
 
-- 📊 **Dynamic Dashboard** – Track profile views, comments, likes, followers, and engagement with interactive charts.  
-- 💬 **Chat Assistant** – Ask questions and get instant insights with genUIne AI.  
-- 🤖 **AI UI Generation** – Automatically creates charts, metrics, and tables from user queries.  
-- ⏳ **Time Filters** – View analytics by 7 days, 30 days, or custom ranges.  
-- 🎨 **Modern Design** – Clean UI with animations and engaging visuals.  
-- 🧩 **Modular Components** – Reusable charts, cards, and controls for easy customization.  
-- 📱 **Cross-platform** with Lynx (iOS, Android, Web) 
+- **Dynamic Dashboard** – Track profile views, comments, likes, followers, and engagement with interactive charts.  
+- **Chat Assistant** – Ask questions and get instant insights with genUIne AI.  
+- **AI UI Generation** – Automatically creates charts, metrics, and tables from user queries.  
+- **Time Filters** – View analytics by 7 days, 30 days, or custom ranges.  
+- **Modern Design** – Clean UI with animations and engaging visuals.  
+- **Modular Components** – Reusable charts, cards, and controls for easy customization.  
+- **Cross-platform** with Lynx (iOS, Android, Web) 
 
 ---
 
 ## 🛠️ Tech Stack  
 
-- 🎨 **UI**: Lynx / ReactLynx  
-- 🧠 **AI Orchestration**: Node.js  
-- 📊 **State Management & Charts**: Custom React components  
-- 📦 **Package Manager**: npm  
+- **UI**: Lynx / ReactLynx  
+- **AI Orchestration**: Node.js  
+- **State Management & Charts**: Custom React components  
+- **Package Manager**: npm  
 
 ## Getting Started
 1. Clone the repo:  
