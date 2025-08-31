@@ -23,12 +23,13 @@ With genUIne, creators can describe the insights they want in plain English, and
 - **UI**: Lynx / ReactLynx  
 - **AI Orchestration**: Node.js  
 - **State Management & Charts**: Custom React components  
-- **Package Manager**: npm  
+- **Package Manager**: npm
+- **Natural Language Date Parsing**: [chrono-node](https://www.npmjs.com/package/chrono-node)
 
 ## Getting Started
 1. Clone the repo:  
    ```bash
-   git clone git@github.com:SQ77/genUIne.git
+   git clone https://github.com/SQ77/genUIne.git
    cd genUIne
    ```
 2. Install dependencies:
