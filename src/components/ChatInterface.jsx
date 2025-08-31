@@ -98,7 +98,6 @@ export function ChatInterface({
         try {
             const response = parseUserinput(message);
 
-            console.log('Response is', response);
             const timePeriod = response.timestamps[0].label;
             const timeAmount = response.timestamps[0].range - 1;
 
